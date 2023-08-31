@@ -70,8 +70,6 @@ function game() {
     function onWin() {
 if (score >= 3) {
     console.log("You win!")
-} else {
-    console.log("You Lose ;(")
 };
 
 };
