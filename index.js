@@ -1,80 +1,84 @@
 
 let score = 0;
 
-function getComputerChoice() {
-    function random(arr) {
-        return arr[Math.floor(Math.random() * arr.length)]
-    };
+const textBox = document.querySelector('.text-box');
 
-    let rpsArray = ["rock", "paper", "scissors"];
+//for (let i = 0; i < 5; i++) {
 
-    return random(rpsArray);
-}
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', function(event) {
+       
+        function game() {
+            const playerSelection = button.id;
+            const computerSelection = getComputerChoice();
 
+            console.log(playerSelection);
+            console.log(computerSelection);
 
+            playRound(playerSelection, computerSelection);
 
+            function getComputerChoice() {
+                function random(arr) {
+                    return arr[Math.floor(Math.random() * arr.length)]
+                };
+                let rpsArray = ["rock", "paper", "scissors"];
+                return random(rpsArray);
+            };
 
-function game() {
+            function playRound(playerSelection, computerSelection) {
+                if (playerSelection === computerSelection) {
+                    return "Tie! Play Again!";
+                } else if (
+                    (playerSelection == "rock" && computerSelection == "paper") ||
+                    (playerSelection == "paper" && computerSelection == "scissors") ||
+                    (playerSelection == "scissors" && computerSelection == "rock")
+                ) { return "No Point";
+                } else if (
+                    (playerSelection == "rock" && computerSelection == "scissors") ||
+                    (playerSelection == "paper" && computerSelection == "rock") ||
+                    (playerSelection == "scissors" && computerSelection == "paper")
+                ) {
+                    return "Yay You got a point!";
+                };
+            };
 
-    for (let i = 0; i < 5; i++) {
-
-    const playerSelection = prompt("Rock, Paper, or Scissors?", '');
-
-    const computerSelection = getComputerChoice();
-
-    playRound(playerSelection, computerSelection);
-
-    console.log(computerSelection);
-    console.log(playerSelection);
-
-    keepScore();
-    console.log(score);
-
-    onWin();
-
+            keepScore();
+            console.log(score);
     
-    function playRound(playerSelection, computerSelection) {
+            onWin();
 
-        let newChoice = playerSelection.toLowerCase();
-    
-        if (newChoice === computerSelection) {
-            return "Tie! Play Again!";
-        } else if (
-            (newChoice == "rock" && computerSelection == "paper") ||
-            (newChoice == "paper" && computerSelection == "scissors") ||
-            (newChoice == "scissors" && computerSelection == "rock")
-        ) { return "No Point";
-        } else if (
-            (newChoice == "rock" && computerSelection == "scissors") ||
-            (newChoice == "paper" && computerSelection == "rock") ||
-            (newChoice == "scissors" && computerSelection == "paper")
-        ) {
-            return "Yay You got a point!";
+            function keepScore() {
+            let result = playRound();
+            console.log(result);
+            if (result == "Yay You got a point!") {
+                score++
+            } else {
+                return "Try Again"
+            };
+            console.log(score);
         };
-    };
+        
+            function onWin() {
+            if (score >= 3) {
+            console.log("You win!")
+        };
+        
+        };
+        };
+
+        game();
+
+        
+
     
-   
-    function keepScore() {
-    let result = playRound(playerSelection, computerSelection);
-    console.log(result);
+})
+});
 
-    if (result == "Yay You got a point!") {
-        score++
-    } else {
-        return "Try Again"
-    };
+const para = document.createElement('h3');
+para.textContent = score;
+para.style.color = 'blue';
+textBox.appendChild(para);
 
-    console.log(score);
-};
+//};
 
-    function onWin() {
-if (score >= 3) {
-    console.log("You win!")
-};
-
-};
-    };
-};
-
-
-game();
