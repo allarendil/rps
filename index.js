@@ -51,15 +51,9 @@ function onWin() {
 };
 };
 
-function resetText(textBox) {
-    textBox = '';
-};
-
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
 button.addEventListener('click', () => {
-
-
 
 const playerSelection = button.id;
 const computerSelection = getComputerChoice(); 
@@ -68,22 +62,19 @@ playRound(playerSelection, computerSelection);
 
 onWin();
 
-resetText();
-
 const parap = document.createElement('h3');
 parap.textContent = playerScore;
-parap.style.color = 'blue';
+parap.style.color = 'FloralWhite';
 textBox.appendChild(parap);
 
 const parac = document.createElement('h3');
 parac.textContent = compScore;
-parac.style.color = 'red';
+parac.style.color = 'SaddleBrown';
 textBox.appendChild(parac);
-
-
 
 })
 });
+
 
 
 
