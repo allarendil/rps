@@ -1,9 +1,9 @@
 
 
-
 const textBox = document.querySelector('.text-box');
 
-let score = 0;
+let playerScore = 0;
+let compScore = 0;
 
 function getComputerChoice() {
     function random(arr) {
@@ -23,84 +23,67 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === "paper" && computerSelection === "scissors") ||
         (playerSelection === "scissors" && computerSelection === "rock")
     ) { 
+        compScore++
         const p = document.createElement('p')
-        p.innerText = "No Point";
+        p.innerText = "Computer Wins This Round!";
         textBox.appendChild(p);
     } else if (
         (playerSelection === "rock" && computerSelection === "scissors") ||
         (playerSelection === "paper" && computerSelection === "rock") ||
         (playerSelection === "scissors" && computerSelection === "paper")
     ) {
-        score++
+        playerScore++
         const p = document.createElement('p')
         p.innerText = "Yay You got a point!";
         textBox.appendChild(p);
     };
 };
             
-    
-//function keepScore() {
-//    let result = playRound();
-//    console.log(result);
-//    if (result == "Yay You got a point!") {
-//        score++
-//    } else {
-//        return "Try Again"
-//    };
-//    console.log(score);
-//};
-
 function onWin() {
-    if (score >= 3) {
-    console.log("You win!")
+    if (playerScore >= 5) {
     const h2 = document.createElement('h2')
-        h2.innerText = "Best 3 of 5, You win!!";
+        h2.innerText = "First to 5, You win!!";
+        textBox.appendChild(h2);
+} else if (compScore >= 5) {
+    const h2 = document.createElement('h2')
+        h2.innerText = "Computer is first to 5, You Lose :(";
         textBox.appendChild(h2);
 };
-}
+};
 
-
-//function game() {
-
-//for (let i = 0; i < 5; i++) {
-
+function resetText(textBox) {
+    textBox = '';
+};
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
 button.addEventListener('click', () => {
 
+
+
 const playerSelection = button.id;
 const computerSelection = getComputerChoice(); 
 
-    console.log(playerSelection);
-    console.log(computerSelection);
-
 playRound(playerSelection, computerSelection);
-
-//keepScore();
-    console.log(score);
 
 onWin();
 
-const para = document.createElement('h3');
-para.textContent = score;
-para.style.color = 'blue';
-textBox.appendChild(para);
+resetText();
+
+const parap = document.createElement('h3');
+parap.textContent = playerScore;
+parap.style.color = 'blue';
+textBox.appendChild(parap);
+
+const parac = document.createElement('h3');
+parac.textContent = compScore;
+parac.style.color = 'red';
+textBox.appendChild(parac);
+
+
 
 })
 });
-
-
-
-
-//};
-//};
-
-
-
-//game();
-
-
 
 
 
